@@ -1,0 +1,85 @@
+material 1393170709_1_Fassade_Putz_weiß
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.784313725490196 0.784313725490196 0.784313725490196
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 18.0, 27.0
+      texture_unit
+      {
+        texture 1393170709_2_Cladding_Stucco_White.jpg
+      }
+    }
+  }
+}
+material 1393170709_2_Bedachung_Schindeln_Asphalt
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.435294117647059 0.407843137254902 0.380392156862745
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 36.0, 36.0
+      texture_unit
+      {
+        texture 1393170709_1_Roofing_Shingles_Asphalt.jpg
+      }
+    }
+  }
+}
+material 1393170709_3_Holz_Boden_dunkel
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.6 0.368627450980392 0.164705882352941
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 120.0, 48.0
+      texture_unit
+      {
+        texture 1393170709_3_Wood_Floor_Dark.jpg
+      }
+    }
+  }
+}
+material 1393170709_4_Backstein_grob_dunkel
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 0.368627450980392 0.301960784313725 0.207843137254902
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+      // texture size: 36.0, 22.0
+      texture_unit
+      {
+        texture 1393170709_4_Brick_Rough_Dark.jpg
+      }
+    }
+  }
+}
+material 1393170709_SketchupDefault
+{
+  technique
+  {
+    pass
+    {
+      ambient 0.0 0.0 0.0
+      diffuse 1.0 1.0 1.0
+      specular 0.0 0.0 0.0 0.0
+      emissive 0.0 0.0 0.0
+    }
+  }
+}
