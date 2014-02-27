@@ -16,6 +16,8 @@ import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
+import de.lessvoid.nifty.builder.TextBuilder;
+import de.lessvoid.nifty.controls.button.builder.ButtonBuilder;
 import de.lessvoid.nifty.elements.Element;
 import de.lessvoid.nifty.layout.align.HorizontalAlign;
 import de.lessvoid.nifty.layout.align.VerticalAlign;
@@ -51,7 +53,7 @@ public class GameScreen extends AbstractAppState implements ScreenController {
     private Screen screen;
     private Element popup;
     private Player playerControl;
-    
+
     public GameScreen(Main game) {
         this.rootNode = game.getRootNode();
         this.viewPort = game.getViewPort();
@@ -61,33 +63,37 @@ public class GameScreen extends AbstractAppState implements ScreenController {
         this.audioRenderer = game.getAudioRenderer();
         this.game = game;
     }
-    
+
     @Override
     public void initialize(AppStateManager stateManager, Application app) {
         super.initialize(stateManager, app);
-        
+
         Main.nifty.fromXml("Interface/Screens/GameScreen.xml", "GameScreen", this);
         Main.nifty.gotoScreen("GameScreen");
         setMenuPos();
-        
-        
-        WorldControl mWorld = new WorldControl(game); 
-        game.getStateManager().attach(mWorld);       
-        
+        Element chatControl = Main.nifty.getScreen("GameScreen").findElementByName("ChatWindow");
+        chatControl.add(
+            
+        );
+
+
+        WorldControl mWorld = new WorldControl(game);
+        game.getStateManager().attach(mWorld);
+
         Terrain terrain = new Terrain(game);
         Node terra = terrain.createWorldTerrain();
         localRootNode.attachChild(terra);
-        
+
         // disable the fly cam
         //game.getFlyByCamera().setEnabled(true);
         //game.getFlyByCamera().setDragToRotate(false);
         inputManager.setCursorVisible(false);
-        
-        
-        playerControl = new Player(game);        
+
+
+        playerControl = new Player(game);
         game.getStateManager().attach(playerControl);
     }
-    
+
     @Override
     public void update(float tpf) {
         try {
@@ -120,45 +126,42 @@ public class GameScreen extends AbstractAppState implements ScreenController {
         } catch (NullPointerException e) {
         }
     }
-    
+
     @Override
     public void stateAttached(AppStateManager stateManager) {
         rootNode.attachChild(localRootNode);
         guiNode.attachChild(localGuiNode);
         viewPort.setBackgroundColor(backgroundColor);
     }
-    
+
     @Override
     public void stateDetached(AppStateManager stateManager) {
         rootNode.detachChild(localRootNode);
         guiNode.detachChild(localGuiNode);
     }
-    
+
     public void bind(Nifty nifty, Screen screen) {
         this.nifty = nifty;
         this.screen = screen;
     }
-    
+
     public void onStartScreen() {
-        
     }
-    
+
     public void onEndScreen() {
-        
     }
-    
-    private void setMenuPos()
-    {
+
+    private void setMenuPos() {
         Element companyMenu = Main.nifty.getScreen("GameScreen").findElementByName("CompanyMenu");
-        int xPosCM = Main.settings.getWidth()-200;
-        int yPosCM = Main.settings.getHeight()-800;
-        companyMenu.setConstraintX(new SizeValue(""+xPosCM+""));
-        companyMenu.setConstraintY(new SizeValue(""+yPosCM+""));
-        
+        int xPosCM = Main.settings.getWidth() - 200;
+        int yPosCM = Main.settings.getHeight() - 800;
+        companyMenu.setConstraintX(new SizeValue("" + xPosCM + ""));
+        companyMenu.setConstraintY(new SizeValue("" + yPosCM + ""));
+
         Element playerMenu = Main.nifty.getScreen("GameScreen").findElementByName("PlayerMenu");
-        int xPos = Main.settings.getWidth()-200;
-        int yPos = Main.settings.getHeight()-400;
-        playerMenu.setConstraintX(new SizeValue(""+xPos+""));
-        playerMenu.setConstraintY(new SizeValue(""+yPos+""));
+        int xPos = Main.settings.getWidth() - 200;
+        int yPos = Main.settings.getHeight() - 400;
+        playerMenu.setConstraintX(new SizeValue("" + xPos + ""));
+        playerMenu.setConstraintY(new SizeValue("" + yPos + ""));
     }
 }

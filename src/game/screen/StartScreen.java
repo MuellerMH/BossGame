@@ -14,7 +14,6 @@ import com.jme3.math.ColorRGBA;
 import com.jme3.niftygui.NiftyJmeDisplay;
 import com.jme3.renderer.ViewPort;
 import com.jme3.scene.Node;
-import com.jme3.scene.Spatial;
 import de.lessvoid.nifty.Nifty;
 import de.lessvoid.nifty.controls.Controller;
 import de.lessvoid.nifty.controls.TextField;
@@ -26,13 +25,8 @@ import de.lessvoid.nifty.screen.ScreenController;
 import de.lessvoid.nifty.tools.SizeValue;
 import de.lessvoid.xml.xpp3.Attributes;
 import game.Main;
-import game.Server;
 import game.network.ClientManager;
-import java.net.ConnectException;
 import java.util.Properties;
-import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -97,12 +91,18 @@ public class StartScreen extends AbstractAppState implements ScreenController, C
         try {
             final String userName = nifty.getScreen("EntryScreen").findNiftyControl("textfield0", TextField.class).getRealText();
             System.setProperty("UserName", userName);
-            ClientManager mClient = ClientManager.getInstance();
-            // TODO: check Login
-            GameScreen gameScreen = new GameScreen(game);
-            game.getStateManager().attach(gameScreen);
-            game.getGuiViewPort().removeProcessor(niftyDisplay);
-        } catch (Exception ex) {}
+            if (!userName.isEmpty()) {
+                ClientManager mClient = ClientManager.getInstance();
+                // TODO: check Login
+                GameScreen gameScreen = new GameScreen(game);
+                game.getStateManager().attach(gameScreen);
+                game.getGuiViewPort().removeProcessor(niftyDisplay);
+            } else {
+                TextRenderer text = screen.findElementByName("status_text_login").getRenderer(TextRenderer.class);
+                text.setText("Enter a UserName");                 
+            }
+        } catch (Exception ex) {
+        }
 
 
     }
